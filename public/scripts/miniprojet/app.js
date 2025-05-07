@@ -145,7 +145,7 @@ function finishScreen() {
     replay.style.textAlign = "center";
     document.body.appendChild(replay);
 }
-function main() {
+export function main() {
     createBoard();
     setListeners();
     game();
@@ -214,4 +214,4 @@ function main() {
 // testIsWithinLimits();
 // updateBoard();
 // Lancer le jeu    
-main();
+// main();
