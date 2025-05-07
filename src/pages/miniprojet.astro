@@ -38,5 +38,8 @@ const pageTitle = "Mini Projet - PUNTO";
   <table id="board"></table>
 
   <!-- ✅ 正确导入从 public/scripts/miniprojet/ 中来的 JS 模块 -->
-  <script type="module" src="/WebDev101_Boyang_XU/scripts/miniprojet/entry.js"></script>
+  <script type="module">
+    import { main } from '/scripts/app.js';
+    main();
+  </script>
 </BaseLayout>
