@@ -6,35 +6,40 @@ const pageTitle = "Mini Projet - PUNTO";
 <BaseLayout title={pageTitle}>
   <style>
     body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-    }
-    table {
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    td {
-        width: 55px;
-        height: 55px;
-        background-color: #adacac;
-        border: 1px solid black;
-    }
-    .center-square {
-        background-color: white;
+      font-family: sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    td {
+      width: 55px;
+      height: 55px;
+      background-color: #adacac;
+      border: 1px solid black;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .center-square {
+      background-color: white;
     }
   </style>
 
   <div class="title">Le jeu punto</div>
   <table id="board"></table>
 
-  <script is:inline src="../scripts/miniprojet/app.js"></script>
+  <!-- ✅ 正确导入从 public/scripts/miniprojet/ 中来的 JS 模块 -->
+  <script type="module">
+    import { main } from '/scripts/miniprojet/app.js';
+    main();
+  </script>
 </BaseLayout>
