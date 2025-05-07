@@ -1,5 +1,4 @@
 // public/scripts/climate/climate.js
-import Chart from 'https://cdn.jsdelivr.net/npm/chart.js';
 
 async function fetchTemperatureData(lat, lon) {
   const response = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=2010-01-01&end_date=2020-12-31&daily=temperature_2m_max&timezone=auto`);
