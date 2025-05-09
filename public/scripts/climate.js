@@ -40,15 +40,52 @@ async function fetchCurrentAndForecastWeather(lat, lon) {
 
 function renderWeatherInfo(current, forecast) {
   const weatherDiv = document.getElementById("weatherInfo");
-  let html = `<h3>🌤️ Météo Actuelle</h3>`;
-  html += `<p><strong>Température :</strong> ${current.temperature}°C<br/><strong>Conditions :</strong> ${weatherCodeToText(current.weathercode)}</p>`;
-  
-  html += `<h3>📅 Prévisions pour les 5 prochains jours</h3><ul>`;
+  const days = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+
+  const today = new Date();
+  const todayLabel = days[today.getDay()];
+  const todayIcon = weatherCodeToIcon(current.weathercode);
+
+  let html = `
+    <div class="weather-container">
+      <div class="weather-card selected">
+        <div class="day">${todayLabel}</div>
+        <div class="icon">${todayIcon}</div>
+        <div class="temp">${current.temperature}°</div>
+        <div class="minmax">--</div>
+      </div>
+  `;
+
   for (let i = 0; i < forecast.time.length; i++) {
-    html += `<li><strong>${forecast.time[i]}</strong> : ${forecast.temperature_2m_min[i]}°C ~ ${forecast.temperature_2m_max[i]}°C, ${weatherCodeToText(forecast.weathercode[i])}</li>`;
+    const date = new Date(forecast.time[i]);
+    const day = days[date.getDay()];
+    const icon = weatherCodeToIcon(forecast.weathercode[i]);
+    html += `
+      <div class="weather-card">
+        <div class="day">${day}</div>
+        <div class="icon">${icon}</div>
+        <div class="temp">${forecast.temperature_2m_max[i]}°</div>
+        <div class="minmax">${forecast.temperature_2m_min[i]}°</div>
+      </div>
+    `;
   }
-  html += `</ul>`;
+
+  html += `</div>`;
   weatherDiv.innerHTML = html;
+}
+
+function weatherCodeToIcon(code) {
+  if ([0].includes(code)) return "☀️";
+  if ([1, 2].includes(code)) return "🌤️";
+  if ([3].includes(code)) return "☁️";
+  if ([45, 48].includes(code)) return "🌫️";
+  if ([51, 53, 55, 56, 57].includes(code)) return "🌧️";
+  if ([61, 63, 65].includes(code)) return "🌦️";
+  if ([66, 67].includes(code)) return "🌨️";
+  if ([71, 73, 75, 77].includes(code)) return "❄️";
+  if ([80, 81, 82].includes(code)) return "🌦️";
+  if ([95, 96, 99].includes(code)) return "⛈️";
+  return "❓";
 }
 
 function weatherCodeToText(code) {
