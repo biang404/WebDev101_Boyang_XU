@@ -21,14 +21,31 @@ const pageTitle = "ClimatTrend - Visualisation des Températures Moyennes";
     }
   </style>
 
-  <div class="container">
-    <h1>🌍 Visualisateur de Tendance du Climat</h1>
-    <p>Entrez une ville pour voir l'évolution des températures maximales annuelles moyennes entre 2010 et 2020.</p>
-    <input id="cityInput" type="text" placeholder="Ex : Paris" />
-    <button id="fetchBtn">Afficher la tendance</button>
-    <h2 id="locationLabel"></h2>
+<div class="container">
+  <h1>🌍 Visualisateur de Tendance du Climat</h1>
+  <div>
+    <button onclick="switchView('past')">📈 过往气温统计</button>
+    <button onclick="switchView('forecast')">🌤️ 当前及未来5日气温</button>
+  </div>
+
+  <!-- 过往气温视图 -->
+  <div id="pastView" style="display: none;">
+    <p>请输入城市以查看2010–2020年平均最高气温趋势。</p>
+    <input id="cityInputPast" type="text" placeholder="Ex : Paris" />
+    <button id="fetchBtnPast">查看趋势</button>
+    <h2 id="locationLabelPast"></h2>
     <canvas id="chart" width="800" height="400"></canvas>
   </div>
+
+  <!-- 天气预报视图 -->
+  <div id="forecastView" style="display: none;">
+    <p>请输入城市以查看当前天气和未来5日预报。</p>
+    <input id="cityInputForecast" type="text" placeholder="Ex : Paris" />
+    <button id="fetchBtnForecast">查看天气</button>
+    <h2 id="locationLabelForecast"></h2>
+    <div id="weatherInfo"></div>
+  </div>
+</div>
 
   <!-- 引入 Chart.js CDN（使用全局变量方式） -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

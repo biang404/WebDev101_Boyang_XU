@@ -25,6 +25,48 @@ async function fetchTemperatureData(lat, lon) {
   return { labels, averages };
 }
 
+async function fetchCurrentAndForecastWeather(lat, lon) {
+  const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&forecast_days=5&timezone=auto`);
+  const data = await response.json();
+
+  const current = data.current_weather;
+  const daily = data.daily;
+
+  return {
+    current,
+    forecast: daily
+  };
+}
+
+function renderWeatherInfo(current, forecast) {
+  const weatherDiv = document.getElementById("weatherInfo");
+  let html = `<h3>🌤️ Météo Actuelle</h3>`;
+  html += `<p><strong>Température :</strong> ${current.temperature}°C<br/><strong>Conditions :</strong> ${weatherCodeToText(current.weathercode)}</p>`;
+  
+  html += `<h3>📅 Prévisions pour les 5 prochains jours</h3><ul>`;
+  for (let i = 0; i < forecast.time.length; i++) {
+    html += `<li><strong>${forecast.time[i]}</strong> : ${forecast.temperature_2m_min[i]}°C ~ ${forecast.temperature_2m_max[i]}°C, ${weatherCodeToText(forecast.weathercode[i])}</li>`;
+  }
+  html += `</ul>`;
+  weatherDiv.innerHTML = html;
+}
+
+function weatherCodeToText(code) {
+  const codes = {
+    0: "Ciel clair",
+    1: "Principalement clair",
+    2: "Partiellement nuageux",
+    3: "Couvert",
+    45: "Brouillard",
+    48: "Brouillard givrant",
+    51: "Bruine légère",
+    61: "Pluie faible",
+    80: "Averses légères",
+    95: "Orages"
+  };
+  return codes[code] || "Conditions inconnues";
+}
+
 function renderChart(labels, data) {
   const ctx = document.getElementById("chart").getContext("2d");
   if (window.tempChart) window.tempChart.destroy(); // 销毁旧图
@@ -55,20 +97,39 @@ function renderChart(labels, data) {
   });
 }
 
-document.getElementById("fetchBtn").addEventListener("click", async () => {
-  const city = document.getElementById("cityInput").value;
-
-  // 简单地获取经纬度（可以换成更专业的 API）
+document.getElementById("fetchBtnPast").addEventListener("click", async () => {
+  const city = document.getElementById("cityInputPast").value;
   const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`).then(r => r.json());
 
   if (!geo.results || geo.results.length === 0) {
-    alert("City not found.");
+    alert("城市未找到。");
     return;
   }
 
   const { latitude, longitude, name, country } = geo.results[0];
-  document.getElementById("locationLabel").innerText = `📍 ${name}, ${country}`;
+  document.getElementById("locationLabelPast").innerText = `📍 ${name}, ${country}`;
 
   const { labels, averages } = await fetchTemperatureData(latitude, longitude);
   renderChart(labels, averages);
 });
+
+document.getElementById("fetchBtnForecast").addEventListener("click", async () => {
+  const city = document.getElementById("cityInputForecast").value;
+  const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`).then(r => r.json());
+
+  if (!geo.results || geo.results.length === 0) {
+    alert("城市未找到。");
+    return;
+  }
+
+  const { latitude, longitude, name, country } = geo.results[0];
+  document.getElementById("locationLabelForecast").innerText = `📍 ${name}, ${country}`;
+
+  const weatherData = await fetchCurrentAndForecastWeather(latitude, longitude);
+  renderWeatherInfo(weatherData.current, weatherData.forecast);
+});
+
+window.switchView = function(view) {
+  document.getElementById("pastView").style.display = (view === "past") ? "block" : "none";
+  document.getElementById("forecastView").style.display = (view === "forecast") ? "block" : "none";
+}
