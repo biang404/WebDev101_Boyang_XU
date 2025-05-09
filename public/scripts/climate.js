@@ -41,20 +41,18 @@ async function fetchCurrentAndForecastWeather(lat, lon) {
 function renderWeatherInfo(current, forecast) {
   const weatherDiv = document.getElementById("weatherInfo");
   const days = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
-
   const today = new Date();
   const todayLabel = days[today.getDay()];
   const todayIcon = weatherCodeToIcon(current.weathercode);
 
-  let html = `
-    <div class="weather-container">
-      <div class="weather-card selected">
-        <div class="day">${todayLabel}</div>
-        <div class="icon">${todayIcon}</div>
-        <div class="temp">${current.temperature}°</div>
-        <div class="minmax">--</div>
-      </div>
-  `;
+  let html = `<div class="weather-container">`;
+
+  html += `
+    <div class="weather-card selected">
+      <div class="day">${todayLabel}</div>
+      <div class="icon">${todayIcon}</div>
+      <div class="temps"><div class="min">--</div><div class="max">${current.temperature}°</div></div>
+    </div>`;
 
   for (let i = 0; i < forecast.time.length; i++) {
     const date = new Date(forecast.time[i]);
@@ -64,8 +62,10 @@ function renderWeatherInfo(current, forecast) {
       <div class="weather-card">
         <div class="day">${day}</div>
         <div class="icon">${icon}</div>
-        <div class="temp">${forecast.temperature_2m_max[i]}°</div>
-        <div class="minmax">${forecast.temperature_2m_min[i]}°</div>
+        <div class="temps">
+          <div class="min">${forecast.temperature_2m_min[i]}°</div>
+          <div class="max">${forecast.temperature_2m_max[i]}°</div>
+        </div>
       </div>
     `;
   }

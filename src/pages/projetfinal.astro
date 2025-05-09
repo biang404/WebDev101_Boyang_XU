@@ -19,7 +19,7 @@ const pageTitle = "ClimatTrend - Visualisation des Températures Moyennes";
       font-size: 16px;
       margin: 10px;
     }
-    
+
     .weather-container {
   display: flex;
   justify-content: center;
@@ -28,40 +28,57 @@ const pageTitle = "ClimatTrend - Visualisation des Températures Moyennes";
   margin-top: 20px;
 }
 
-    .weather-card {
-      background: #f8f8f8;
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      width: 90px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      font-size: 14px;
-    }
+    .weather-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
 
-    .weather-card.selected {
-      background: #fff5d0;
-      border: 2px solid #f0c000;
-    }
+.weather-card {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  width: 80px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+  flex: 0 0 auto;
+}
 
-    .weather-card .day {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
+.weather-card.selected {
+  background: #fff5d0;
+  border: 2px solid #f0c000;
+}
 
-    .weather-card .icon {
-      font-size: 24px;
-      margin: 4px 0;
-    }
+.weather-card .day {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
 
-    .weather-card .temp {
-      font-size: 18px;
-      font-weight: bold;
-    }
+.weather-card .icon {
+  font-size: 24px;
+  margin: 4px 0;
+}
 
-    .weather-card .minmax {
-      color: #555;
-      font-size: 13px;
-    }
+.weather-card .temps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.weather-card .min {
+  opacity: 0.5;
+}
+
+.weather-card .max {
+  opacity: 0.9;
+}
+
   </style>
 
 <div class="container">
