@@ -19,35 +19,55 @@ const pageTitle = "ClimatTrend - Visualisation des Températures Moyennes";
       font-size: 16px;
       margin: 10px;
     }
+    #map {
+      height: 500px;
+      width: 100%;
+      margin: 20px 0;
+    }
   </style>
 
-<div class="container">
-  <h1>🌍 Visualisateur de Tendance du Climat</h1>
-  <div>
-    <button onclick="switchView('past')">📈 过往气温统计</button>
-    <button onclick="switchView('forecast')">🌤️ 当前及未来5日气温</button>
+  <div class="container">
+    <h1>🌍 Visualisateur de Tendance du Climat</h1>
+    <div>
+      <button onclick="switchView('past')">📈 Statistiques des températures passées</button>
+      <button onclick="switchView('forecast')">🌤️ Météo actuelle et prévisions sur 5 jours</button>
+      <button onclick="switchView('map')">🗺️ Explorer via carte</button>
+    </div>
+
+    <!-- Vue des températures passées -->
+    <div id="pastView" style="display: none;">
+      <p>Veuillez entrer une ville pour visualiser la tendance des températures maximales moyennes entre 2010 et 2020.</p>
+      <input id="cityInputPast" type="text" placeholder="Ex : Paris" />
+      <button id="fetchBtnPast">Afficher la tendance</button>
+      <h2 id="locationLabelPast"></h2>
+      <canvas id="chart" width="800" height="400"></canvas>
+    </div>
+
+    <!-- Vue des prévisions météo -->
+    <div id="forecastView" style="display: none;">
+      <p>Veuillez entrer une ville pour voir la météo actuelle et les prévisions pour les 5 prochains jours.</p>
+      <input id="cityInputForecast" type="text" placeholder="Ex : Paris" />
+      <button id="fetchBtnForecast">Afficher la météo</button>
+      <h2 id="locationLabelForecast"></h2>
+      <div id="weatherInfo"></div>
+    </div>
+
+    <!-- Vue carte -->
+    <div id="mapView" style="display: none;">
+      <p>Cliquez sur un point de la carte pour explorer la météo actuelle et la tendance historique.</p>
+      <div id="map"></div>
+      <h2 id="mapLocationLabel"></h2>
+      <canvas id="mapChart" width="800" height="400"></canvas>
+    </div>
   </div>
 
-  <!-- 过往气温视图 -->
-  <div id="pastView" style="display: none;">
-    <p>请输入城市以查看2010–2020年平均最高气温趋势。</p>
-    <input id="cityInputPast" type="text" placeholder="Ex : Paris" />
-    <button id="fetchBtnPast">查看趋势</button>
-    <h2 id="locationLabelPast"></h2>
-    <canvas id="chart" width="800" height="400"></canvas>
-  </div>
+  <!-- 引入 Leaflet CSS 和 JS -->
+  <link rel="stylesheet" href="/css/leaflet.css" />
+  <script src="/js/leaflet.js"></script>
 
-  <!-- 天气预报视图 -->
-  <div id="forecastView" style="display: none;">
-    <p>请输入城市以查看当前天气和未来5日预报。</p>
-    <input id="cityInputForecast" type="text" placeholder="Ex : Paris" />
-    <button id="fetchBtnForecast">查看天气</button>
-    <h2 id="locationLabelForecast"></h2>
-    <div id="weatherInfo"></div>
-  </div>
-</div>
-
-  <!-- 引入 Chart.js CDN（使用全局变量方式） -->
+  <!-- 引入 Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script type="module" src="/WebDev101_Boyang_XU/scripts/climate.js"></script>
+
+  <!-- 引入自定义脚本 -->
+  <script type="module" src="/scripts/climate.js"></script>
 </BaseLayout>

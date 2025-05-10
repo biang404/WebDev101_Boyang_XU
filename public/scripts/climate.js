@@ -67,11 +67,10 @@ function weatherCodeToText(code) {
   return codes[code] || "Conditions inconnues";
 }
 
-function renderChart(labels, data) {
-  const ctx = document.getElementById("chart").getContext("2d");
-  if (window.tempChart) window.tempChart.destroy(); // 销毁旧图
-
-  window.tempChart = new Chart(ctx, {
+function renderChart(labels, data, chartId = 'chart') {
+  const ctx = document.getElementById(chartId).getContext("2d");
+  if (window[chartId]) window[chartId].destroy(); // 销毁旧图表
+  window[chartId] = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels,
@@ -86,16 +85,14 @@ function renderChart(labels, data) {
     options: {
       responsive: true,
       scales: {
-        y: {
-          title: { display: true, text: "Temperature (°C)" }
-        },
-        x: {
-          title: { display: true, text: "Year" }
-        }
+        y: { title: { display: true, text: "Temperature (°C)" } },
+        x: { title: { display: true, text: "Year" } }
       }
     }
   });
 }
+
+
 
 document.getElementById("fetchBtnPast").addEventListener("click", async () => {
   const city = document.getElementById("cityInputPast").value;
@@ -129,7 +126,68 @@ document.getElementById("fetchBtnForecast").addEventListener("click", async () =
   renderWeatherInfo(weatherData.current, weatherData.forecast);
 });
 
+// 初始化地图
+const map = L.map('map').setView([20, 0], 2); // 设置初始视图为全球范围
+
+// 添加 OpenStreetMap 图层
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// 地图点击事件处理
+map.on('click', async function(e) {
+  const lat = e.latlng.lat;
+  const lon = e.latlng.lng;
+
+  // 使用 Open-Meteo 的地理编码 API 获取城市名称
+  const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}`);
+  const geoData = await geoResponse.json();
+
+  let locationLabel = `📍 Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`;
+  if (geoData && geoData.name) {
+    locationLabel = `📍 ${geoData.name}, ${geoData.country}`;
+  }
+
+  // 显示位置标签
+  document.getElementById("mapLocationLabel").innerText = locationLabel;
+
+  // 获取气温数据
+  const { labels, averages } = await fetchTemperatureData(lat, lon);
+
+  // 渲染图表
+  const ctx = document.getElementById("mapChart").getContext("2d");
+  if (window.tempCharts === undefined) window.tempCharts = {};
+  if (window.tempCharts[chartId]) window.tempCharts[chartId].destroy();
+  window.tempChart[chartId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Yearly Avg Max Temp (°C)',
+        data: averages,
+        borderWidth: 2,
+        fill: false,
+        tension: 0.2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          title: { display: true, text: "Température (°C)" }
+        },
+        x: {
+          title: { display: true, text: "Année" }
+        }
+      }
+    }
+  });
+});
+
+
 window.switchView = function(view) {
   document.getElementById("pastView").style.display = (view === "past") ? "block" : "none";
   document.getElementById("forecastView").style.display = (view === "forecast") ? "block" : "none";
-}
+  document.getElementById("mapView").style.display = (view === "map") ? "block" : "none";
+};
