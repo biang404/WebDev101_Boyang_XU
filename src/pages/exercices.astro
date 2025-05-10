@@ -33,6 +33,15 @@ const sections = [
       <h2>Exercices</h2>
       <ul>
         {sections.map(section => (
+          <li>
+            <a href={`#${section.id}`}>{section.title}</a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+
+    <main class="content">
+      {sections.map(section => (
   <section id={section.id} class="exercise-section">
     <h3>{section.title}</h3>
 
@@ -80,16 +89,6 @@ const sections = [
     )}
   </section>
 ))}
-      </ul>
-    </aside>
-
-    <main class="content">
-      {sections.map(section => (
-        <section id={section.id} class="exercise-section">
-          <h3>{section.title}</h3>
-          <p>这里是 {section.title} 的内容展示区。</p>
-        </section>
-      ))}
     </main>
   </div>
 </BaseLayout>
