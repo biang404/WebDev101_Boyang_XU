@@ -33,10 +33,53 @@ const sections = [
       <h2>Exercices</h2>
       <ul>
         {sections.map(section => (
-          <li>
-            <a href={`#${section.id}`}>{section.title}</a>
-          </li>
-        ))}
+  <section id={section.id} class="exercise-section">
+    <h3>{section.title}</h3>
+
+    {section.id === "01_hello_world_ts" && (
+      <article>
+        <h4>📝 Question :</h4>
+        <p>
+          Comparez le fichier <code>hello.js</code> et <code>hello.ts</code> et déduisez l'étape de transpilation.
+          À quoi sert le typage fort dans TypeScript qui n'existe pas dans JavaScript ?
+          Répondez dans un fichier texte au format markdown.
+        </p>
+
+        <h4>✅ Réponse :</h4>
+        <h5>La comparaison entre le fichier <code>hello.js</code> et <code>hello.ts</code></h5>
+        <p>
+          En TypeScript, nous devons spécifier le type des variables (par exemple, dans <code>hello.ts</code>, le type de <code>message2</code> est <code>string</code>), alors qu'en JavaScript, ce n'est pas nécessaire.
+          De plus, pour définir une variable constante, les mots-clés utilisés en TypeScript et en JavaScript sont également différents.
+        </p>
+
+        <h5>L'étape de transpilation :</h5>
+        <p>
+          Le fichier <code>hello.ts</code> est écrit en TypeScript, un langage qui ajoute des fonctionnalités supplémentaires à JavaScript, notamment le typage statique.
+          Lors de la transpilation (conversion du code TypeScript en JavaScript), le compilateur TypeScript (<code>tsc</code>) supprime les annotations de type et génère un fichier JavaScript standard.
+        </p>
+        <p>Exemple :</p>
+        <pre><code class="language-ts">const message2: string = "Hello World";</code></pre>
+        <p>devient :</p>
+        <pre><code class="language-js">var message1 = "Hello World";</code></pre>
+
+        <h5>Rôle du typage fort dans TypeScript :</h5>
+        <ul>
+          <li>✅ Détection des erreurs de type avant exécution.</li>
+          <li>✅ Meilleure lisibilité et compréhension du code.</li>
+          <li>✅ Autocomplétion plus précise dans les IDEs.</li>
+          <li>✅ Moins de bugs liés aux types, meilleur maintien du code.</li>
+          <li>✅ Support des concepts avancés comme les interfaces, génériques, SOLID.</li>
+        </ul>
+
+        <p><strong>En résumé :</strong> le typage fort dans TypeScript ajoute une couche de sécurité et de clarté qui n'existe pas dans JavaScript seul.</p>
+      </article>
+    )}
+
+    {section.id !== "01_hello_world_ts" && (
+      <p>这里是 {section.title} 的内容展示区。</p>
+    )}
+  </section>
+))}
       </ul>
     </aside>
 
