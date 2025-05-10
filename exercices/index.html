@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Exercices - WebDev101</title><!-- 引入全局 CSS --><link rel="stylesheet" href="/styles/global.css"><style>html{scroll-behavior:smooth}body{margin:0;padding:0;font-family:sans-serif}nav{position:fixed;top:0;left:0;width:100%;height:60px;background-color:#fff;z-index:1000;border-bottom:1px solid #eee}.exercise-layout{display:flex;min-height:100vh}.sidebar{width:250px;padding:1rem;border-right:1px solid #eee;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;background:#f9f9f9}.sidebar h2{font-size:1.2rem;margin-bottom:1rem}.sidebar ul{list-style:none;padding:0;margin:0}.sidebar li{margin-bottom:.5rem}.sidebar a{color:#2c3e50;text-decoration:none;padding:.3rem .6rem;display:block;border-radius:6px;transition:background .3s,color .3s}.sidebar a:hover{background:#0000000d;color:#48a5e7}.sidebar a.active{font-weight:700;background:#48a5e7;color:#fff}.content{flex:1;padding:2rem;padding-top:60px}.exercise-section{scroll-margin-top:60px}.exercise-section h3{border-bottom:1px solid #ddd;padding-bottom:.5rem;code{background-color:#f6f8fa;color:#d73a49;padding:.2em .4em;border-radius:6px;font-family:SFMono-Regular,Consolas,monospace;font-size:.95em}pre{background-color:#f6f8fa;color:#24292e;padding:1em;border-radius:6px;overflow-x:auto;font-size:.95em;line-height:1.4}pre code{background:none;color:inherit;padding:0}}
+nav[data-astro-cid-5knycien]{position:fixed;top:0;left:0;right:0;height:60px;background-color:#fff;z-index:1000;box-shadow:0 2px 4px #0000001a;display:flex;align-items:center}ul[data-astro-cid-5knycien]{display:flex;justify-content:space-around;align-items:center;list-style:none;margin:0;padding:0;height:100%;width:100%}a[data-astro-cid-5knycien]{text-decoration:none;color:#2c3e50;padding:.5rem 1rem;border-radius:8px;transition:all .3s ease;font-family:sans-serif}a[data-astro-cid-5knycien]:hover{color:#e4a150;background-color:#e4a1501a}li[data-astro-cid-5knycien]{flex:1;text-align:center}#game-container[data-astro-cid-sckkx6r4]{position:relative;z-index:1;padding-top:60px}nav[data-astro-cid-sckkx6r4]{position:fixed;top:0;left:0;width:100%;z-index:1000}
+</style></head> <body data-astro-cid-sckkx6r4> <nav data-astro-cid-5knycien> <ul data-astro-cid-5knycien> <li data-astro-cid-5knycien><a href="/WebDev101_Boyang_XU/" data-astro-cid-5knycien>Home</a></li> <li data-astro-cid-5knycien><a href="/WebDev101_Boyang_XU/exercices/" data-astro-cid-5knycien>Exercices WebDev101</a></li> <li data-astro-cid-5knycien><a href="/WebDev101_Boyang_XU/miniprojet/" data-astro-cid-5knycien>Mini Projet - PUNTO</a></li> <li data-astro-cid-5knycien><a href="/WebDev101_Boyang_XU/projetfinal/" data-astro-cid-5knycien>Projet Final</a></li> </ul> </nav>  <main style="padding-top: 60px;" data-astro-cid-sckkx6r4>  <div class="exercise-layout"> <aside class="sidebar"> <h2>Exercices</h2> <ul> <li> <a href="#01_hello_world_ts">01 hello world typescript</a> </li><li> <a href="#02_hello_astro_typescript">02 hello astro typescript</a> </li><li> <a href="#03_modules">03 modules</a> </li><li> <a href="#04_client_server">04 client or server side</a> </li><li> <a href="#05_html_css_punto">05 html css punto</a> </li><li> <a href="#06_css_flexbox">06 CSS flexbox</a> </li><li> <a href="#07_fat_arrow">07 fat arrow</a> </li><li> <a href="#08_map_reduce">08 map reduce filter</a> </li><li> <a href="#09_objects">09 objects</a> </li><li> <a href="#10_json">10 json</a> </li><li> <a href="#11_generics">11 generics</a> </li><li> <a href="#12_exceptions">12 exceptions</a> </li><li> <a href="#13_async_await">13 async await</a> </li><li> <a href="#14_fetch">14 fetch</a> </li><li> <a href="#15_cors">15 cors</a> </li><li> <a href="#16_http_crud">16 http CRUD</a> </li><li> <a href="#17_forms">17 forms</a> </li><li> <a href="#18_web_components">18 web components</a> </li> </ul> </aside> <main class="content"> <section id="01_hello_world_ts" class="exercise-section"> <h3>01 hello world typescript</h3> <article> <h4>📝 Question :</h4> <p>
+Comparez le fichier <code>hello.js</code> et <code>hello.ts</code> et déduisez l'étape de transpilation.
+          À quoi sert le typage fort dans TypeScript qui n'existe pas dans JavaScript ?
+          Répondez dans un fichier texte au format markdown.
+</p> <h4>✅ Réponse :</h4> <h5>La comparaison entre le fichier <code>hello.js</code> et <code>hello.ts</code></h5> <p>
+En TypeScript, nous devons spécifier le type des variables (par exemple, dans <code>hello.ts</code>, le type de <code>message2</code> est <code>string</code>), alors qu'en JavaScript, ce n'est pas nécessaire.
+          De plus, pour définir une variable constante, les mots-clés utilisés en TypeScript et en JavaScript sont également différents.
+</p> <h5>L'étape de transpilation :</h5> <p>
+Le fichier <code>hello.ts</code> est écrit en TypeScript, un langage qui ajoute des fonctionnalités supplémentaires à JavaScript, notamment le typage statique.
+          Lors de la transpilation (conversion du code TypeScript en JavaScript), le compilateur TypeScript (<code>tsc</code>) supprime les annotations de type et génère un fichier JavaScript standard.
+</p> <p>Exemple :</p> <pre><code class="language-ts">const message2: string = "Hello World";</code></pre> <p>devient :</p> <pre><code class="language-js">var message1 = "Hello World";</code></pre> <h5>Rôle du typage fort dans TypeScript :</h5> <ul> <li>✅ Détection des erreurs de type avant exécution.</li> <li>✅ Meilleure lisibilité et compréhension du code.</li> <li>✅ Autocomplétion plus précise dans les IDEs.</li> <li>✅ Moins de bugs liés aux types, meilleur maintien du code.</li> <li>✅ Support des concepts avancés comme les interfaces, génériques, SOLID.</li> </ul> <p><strong>En résumé :</strong> le typage fort dans TypeScript ajoute une couche de sécurité et de clarté qui n'existe pas dans JavaScript seul.</p> </article>   </section><section id="02_hello_astro_typescript" class="exercise-section"> <h3>02 hello astro typescript</h3>  <article> <h4>📝 Question :</h4> <p>
+Créez une application web servie avec <strong>Astro</strong>, en <strong>TypeScript</strong>, qui affiche <code>"Bonjour, TypeScript!"</code> dans la page web :
+</p> <ul> <li>Créer programmatiquement (depuis le script TypeScript) un <code>&lt;div&gt;</code> avec un id <code>"app"</code></li> <li>Créer un <code>&lt;h1&gt;</code> avec le texte <code>"Bonjour, TypeScript!"</code></li> <li>Ajouter le <code>&lt;h1&gt;</code> dans le <code>&lt;div&gt;</code></li> <li>Ajouter le <code>&lt;div&gt;</code> dans le <code>&lt;body&gt;</code></li> </ul> <h4>✅ Réponse :</h4> <p>
+Pour accomplir cette tâche, suivez les instructions fournies dans le lien suivant :
+<a href="https://webdev101.gitlab.io/#/02_hello_astro_typescript/" target="_blank">webdev101.gitlab.io</a>,
+      puis modifiez le fichier <code>src/pages/index.astro</code> comme suit :
+</p> <pre><code class="language-html">
+---
+---
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Astro + TypeScript&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src="../scripts/app.ts"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre> <p>
+Ensuite, créez un dossier <code>src/scripts</code> et ajoutez un fichier nommé <code>app.ts</code> avec le code TypeScript suivant :
+</p> <pre><code class="language-ts">
+// créer programmatiquement (depuis le script TypeScript) un div avec un id "app"
+const appDiv = document.createElement("div");
+appDiv.id = "app";
+
+// créer un h1 avec le texte "Bonjour, TypeScript!"
+const heading = document.createElement("h1");
+heading.textContent = "Bonjour, TypeScript!";
+
+// ajouter le h1 dans le div
+appDiv.appendChild(heading);
+
+// ajouter le div dans le body
+document.body.appendChild(appDiv);
+    </code></pre> <p>
+Ce script ajoutera dynamiquement une structure HTML dans la page une fois qu'elle est chargée, permettant à l'utilisateur de voir le message « Bonjour, TypeScript! » généré par TypeScript.
+</p> </article>  </section><section id="03_modules" class="exercise-section"> <h3>03 modules</h3>   <p>这里是 03 modules 的内容展示区。</p> </section><section id="04_client_server" class="exercise-section"> <h3>04 client or server side</h3>   <p>这里是 04 client or server side 的内容展示区。</p> </section><section id="05_html_css_punto" class="exercise-section"> <h3>05 html css punto</h3>   <p>这里是 05 html css punto 的内容展示区。</p> </section><section id="06_css_flexbox" class="exercise-section"> <h3>06 CSS flexbox</h3>   <p>这里是 06 CSS flexbox 的内容展示区。</p> </section><section id="07_fat_arrow" class="exercise-section"> <h3>07 fat arrow</h3>   <p>这里是 07 fat arrow 的内容展示区。</p> </section><section id="08_map_reduce" class="exercise-section"> <h3>08 map reduce filter</h3>   <p>这里是 08 map reduce filter 的内容展示区。</p> </section><section id="09_objects" class="exercise-section"> <h3>09 objects</h3>   <p>这里是 09 objects 的内容展示区。</p> </section><section id="10_json" class="exercise-section"> <h3>10 json</h3>   <p>这里是 10 json 的内容展示区。</p> </section><section id="11_generics" class="exercise-section"> <h3>11 generics</h3>   <p>这里是 11 generics 的内容展示区。</p> </section><section id="12_exceptions" class="exercise-section"> <h3>12 exceptions</h3>   <p>这里是 12 exceptions 的内容展示区。</p> </section><section id="13_async_await" class="exercise-section"> <h3>13 async await</h3>   <p>这里是 13 async await 的内容展示区。</p> </section><section id="14_fetch" class="exercise-section"> <h3>14 fetch</h3>   <p>这里是 14 fetch 的内容展示区。</p> </section><section id="15_cors" class="exercise-section"> <h3>15 cors</h3>   <p>这里是 15 cors 的内容展示区。</p> </section><section id="16_http_crud" class="exercise-section"> <h3>16 http CRUD</h3>   <p>这里是 16 http CRUD 的内容展示区。</p> </section><section id="17_forms" class="exercise-section"> <h3>17 forms</h3>   <p>这里是 17 forms 的内容展示区。</p> </section><section id="18_web_components" class="exercise-section"> <h3>18 web components</h3>   <p>这里是 18 web components 的内容展示区。</p> </section> </main> </div>  <!-- 页面内容插入点 --> </main>  <!-- <!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style> --></body></html> <!-- <BaseLayout title={pageTitle}>
+  <h1>Exercices - WebDev101</h1>
+  <p>exxxxxxxererrrrrrrrccccccc</p>
+</BaseLayout> -->
