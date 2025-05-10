@@ -1,14 +1,48 @@
 ---
-// 头部 Frontmatter：可导入组件或数据
 import Layout from '../layouts/Layout.astro';
 const pageTitle = "WebDev101 - demo";
 ---
 
 <Layout title={pageTitle}>
+  <style>
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-image: url('/background.jpg'); 
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+      max-width: 700px;
+    }
+
+    img {
+      margin-top: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+
   <main>
     <h1>WebDev101</h1>
-    <p>Page personnelle de Boyang Xu pour les projets et TP du cours WebDev101, Télécom Paris 2025</p>
-    <!-- 插入图片 -->
-    <img src="/image.png" alt="演示图片" width="600" />
+    <p>
+      Bienvenue sur la page personnelle de <strong>Boyang Xu</strong> dédiée aux projets et aux TP du cours <em>WebDev101</em> de Télécom Paris (2025).
+      <br /><br />
+      Pour explorer le contenu du site, veuillez utiliser les boutons de la barre de navigation ci-dessus.
+    </p>
   </main>
 </Layout>
