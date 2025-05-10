@@ -85,4 +85,30 @@ scroll-margin-top: 60px;
 .exercise-section h3 {
 border-bottom: 1px solid #ddd;
 padding-bottom: 0.5rem;
+
+code {
+  background-color: #f6f8fa;
+  color: #d73a49;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-family: SFMono-Regular, Consolas, monospace;
+  font-size: 0.95em;
+}
+
+pre {
+  background-color: #f6f8fa;
+  color: #24292e;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
 }
