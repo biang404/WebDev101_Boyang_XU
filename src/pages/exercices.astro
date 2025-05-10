@@ -84,9 +84,71 @@ const sections = [
       </article>
     )}
 
-    {section.id !== "01_hello_world_ts" && (
-      <p>这里是 {section.title} 的内容展示区。</p>
-    )}
+    {section.id === "02_hello_astro_typescript" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez une application web servie avec <strong>Astro</strong>, en <strong>TypeScript</strong>, qui affiche <code>"Bonjour, TypeScript!"</code> dans la page web :
+    </p>
+    <ul>
+      <li>Créer programmatiquement (depuis le script TypeScript) un <code>&lt;div&gt;</code> avec un id <code>"app"</code></li>
+      <li>Créer un <code>&lt;h1&gt;</code> avec le texte <code>"Bonjour, TypeScript!"</code></li>
+      <li>Ajouter le <code>&lt;h1&gt;</code> dans le <code>&lt;div&gt;</code></li>
+      <li>Ajouter le <code>&lt;div&gt;</code> dans le <code>&lt;body&gt;</code></li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <p>
+      Pour accomplir cette tâche, suivez les instructions fournies dans le lien suivant :
+      <a href="https://webdev101.gitlab.io/#/02_hello_astro_typescript/" target="_blank">webdev101.gitlab.io</a>,
+      puis modifiez le fichier <code>src/pages/index.astro</code> comme suit :
+    </p>
+
+    <pre><code class="language-html">
+---
+---
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Astro + TypeScript&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src="../scripts/app.ts"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+
+    <p>
+      Ensuite, créez un dossier <code>src/scripts</code> et ajoutez un fichier nommé <code>app.ts</code> avec le code TypeScript suivant :
+    </p>
+
+    <pre><code class="language-ts">
+// créer programmatiquement (depuis le script TypeScript) un div avec un id "app"
+const appDiv = document.createElement("div");
+appDiv.id = "app";
+
+// créer un h1 avec le texte "Bonjour, TypeScript!"
+const heading = document.createElement("h1");
+heading.textContent = "Bonjour, TypeScript!";
+
+// ajouter le h1 dans le div
+appDiv.appendChild(heading);
+
+// ajouter le div dans le body
+document.body.appendChild(appDiv);
+    </code></pre>
+
+    <p>
+      Ce script ajoutera dynamiquement une structure HTML dans la page une fois qu'elle est chargée, permettant à l'utilisateur de voir le message « Bonjour, TypeScript! » généré par TypeScript.
+    </p>
+  </article>
+)}
+
+    {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" && (
+  <p>这里是 {section.title} 的内容展示区。</p>
+)}
   </section>
 ))}
     </main>
