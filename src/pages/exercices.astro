@@ -504,9 +504,933 @@ setInterval(() => {
   </article>
 )}
 
+{section.id === "08_map_reduce" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez un tableau de chaînes de caractères qui représentent des noms de fruits (le tableau initial) :
+      <code>"pomme", "kiwi", "banane", "cerise", "orange", "poire", "fraise", "prune", "ananas", "pêche"</code>
+    </p>
+    <ul>
+      <li>Utilisez <code>map</code> et une fonction fléchée pour créer un nouveau tableau où chaque fruit est écrit en majuscules.</li>
+      <li>Utilisez <code>filter</code> et une fonction fléchée pour créer un nouveau tableau qui ne contient que les fruits qui commencent par la lettre <code>'p'</code>.</li>
+      <li>Utilisez <code>reduce</code> et une fonction fléchée pour obtenir une seule chaîne qui contient tous les noms de fruits séparés par des virgules.</li>
+      <li>Utilisez <code>find</code> et une fonction fléchée pour trouver le premier fruit qui a plus de 5 lettres.</li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <p>Voici un exemple de code TypeScript qui répond à toutes les consignes ci-dessus :</p>
+
+    <pre><code class="language-ts" is:raw>{`let tab: string[] = ["pomme", "kiwi", "banane", "cerise", "orange", "poire", "fraise", "prune", "ananas", "pêche"];
+console.log("tab: " + tab);
+
+// utilisation de map
+function toUpperCase(str: string): string {
+  return str.toUpperCase();
+}
+let tab_majuscule: string[] = tab.map(toUpperCase);
+console.log("tab.map(toUpperCase): " + tab_majuscule);
+
+// utilisation de filter
+function filter_p(str: string): boolean {
+  return str.startsWith("p");
+}
+let tab_filtrage: string[] = tab.filter(filter_p);
+console.log("tab.filter(filter_p): " + tab_filtrage);
+
+// utilisation de reduce
+let chaine = (a: string, b: string) => a + "," + b;
+let tab_reduce = tab.reduce(chaine);
+console.log("tab.reduce(chaine): " + tab_reduce);
+
+// utilisation de find
+function plusGrandQue5(str: string): boolean {
+  return str.length > 5;
+}
+let tab_plusGrandQue5_valeur = tab.find(plusGrandQue5);
+let tab_plusGrandQue5_index = tab.findIndex(plusGrandQue5);
+console.log(
+  \`\${tab_plusGrandQue5_valeur} est le premier élément supérieur à 5 et il est situé à la position \${tab_plusGrandQue5_index}\`
+);`}</code></pre>
+
+    <p>
+      Ce code utilise les quatre méthodes fonctionnelles de manipulation de tableaux en JavaScript (<code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>) avec des fonctions fléchées ou des fonctions classiques selon les besoins pédagogiques.
+    </p>
+  </article>
+)}
+
+
+{section.id === "09_obejcts" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez une interface <code>IVehicle</code> qui définit une méthode <code>drive</code> qui renvoie <code>void</code> et une méthode <code>honk</code> qui renvoie <code>void</code>.
+    </p>
+    <p>
+      Créez une classe abstraite <code>Vehicle</code> qui implémente <code>IVehicle</code> et qui a une propriété <code>speed</code>, une méthode abstraite <code>honk</code> (qui renvoie <code>void</code>), et une méthode <code>drive</code> qui affiche <code>"Driving at " + this.speed + " km/h"</code> dans la console.
+    </p>
+    <p>
+      Créez une classe <code>Car</code> qui hérite de <code>Vehicle</code> et implémente <code>honk</code> avec l'affichage <code>"Beep beep!"</code>.
+    </p>
+    <p>
+      Créez une classe <code>Bicycle</code> qui hérite de <code>Vehicle</code> et implémente <code>honk</code> avec l'affichage <code>"Ring Ring"</code>.
+    </p>
+    <p>
+      Créez deux instances de <code>Car</code> et trois de <code>Bicycle</code>, puis ajoutez-les à un tableau <code>vehicles</code> de type <code>IVehicle[]</code>.
+    </p>
+    <p>
+      Parcourez le tableau <code>vehicles</code> avec une boucle <code>for...of</code> et appelez les méthodes <code>drive</code> et <code>honk</code> à chaque itération.
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`interface IVehicle {
+  drive(): void;
+  honk(): void;
+}
+
+abstract class Vehicle implements IVehicle {
+  speed: number;
+
+  constructor(speed: number) {
+    this.speed = speed;
+  }
+
+  abstract honk(): void;
+
+  drive(): void {
+    console.log(\`Driving at \${this.speed} km/h\`);
+  }
+}
+
+class Car extends Vehicle {
+  honk(): void {
+    console.log("Beep beep!");
+  }
+}
+
+class Bicycle extends Vehicle {
+  honk(): void {
+    console.log("Ring Ring");
+  }
+}
+
+// Créer des instances de Car et Bicycle
+const car1 = new Car(100);
+const car2 = new Car(120);
+const bicycle1 = new Bicycle(20);
+const bicycle2 = new Bicycle(25);
+const bicycle3 = new Bicycle(30);
+
+// Ajouter les instances dans un tableau
+const vehicles: IVehicle[] = [car1, car2, bicycle1, bicycle2, bicycle3];
+
+for (const vehicle of vehicles) {
+  vehicle.drive();
+  vehicle.honk();
+}`}</code></pre>
+
+    <p>
+      Cette activité permet de comprendre l'utilisation des interfaces, classes abstraites, héritage, et polymorphisme en TypeScript avec une syntaxe orientée objet.
+    </p>
+  </article>
+)}
+
+{section.id === "10_json" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <ul>
+      <li>Créez une interface <code>IUser</code> qui représente un utilisateur avec les propriétés <code>id</code>, <code>name</code>, <code>age</code>, et un tableau <code>scores</code> (nombres entiers), ainsi que deux méthodes : <code>getMaxScore</code> et <code>getAverageScore</code>.</li>
+      <li>Créez une classe <code>User</code> qui implémente <code>IUser</code>.</li>
+      <li>Créez trois instances de <code>User</code>.</li>
+      <li>Créez un tableau de type <code>IUser[]</code> contenant ces trois instances.</li>
+      <li>Créez une fonction <code>serializeUsers</code> qui sérialise un tableau de <code>IUser</code> en JSON et affichez le résultat.</li>
+      <li>Créez une fonction <code>deserializeUsers</code> qui prend une chaîne JSON et retourne un tableau de <code>IUser</code>. Appelez cette fonction et affichez le résultat.</li>
+      <li>Expliquez pourquoi on ne peut pas appeler <code>getMaxScore</code> et <code>getAverageScore</code> sur les objets désérialisés sans conversion.</li>
+      <li>Trouvez une solution pour restaurer le comportement des méthodes, en créant de nouvelles instances de <code>User</code> avec les données désérialisées.</li>
+      <li>Affichez le nom, le score maximum et la moyenne du deuxième utilisateur du tableau désérialisé.</li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`interface IUser {
+  id: string;
+  name: string;
+  age: number;
+  scores: number[];
+  getMaxScore(): number;
+  getAverageScore(): number;
+}
+
+class User implements IUser {
+  id: string;
+  name: string;
+  age: number;
+  scores: number[];
+
+  constructor(id: string, name: string, age: number, scores: number[]) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.scores = scores;
+  }
+
+  getMaxScore(): number {
+    return Math.max(...this.scores);
+  }
+
+  getAverageScore(): number {
+    const total = this.scores.reduce((acc, score) => acc + score, 0);
+    return total / this.scores.length;
+  }
+}
+
+// Création des instances
+const User1 = new User("123", "John", 25, [20, 30, 40]);
+const User2 = new User("456", "Eya", 23, [2.4, 34]);
+const User3 = new User("789", "Emma", 32, [23.1, 9, 5]);
+
+const users: IUser[] = [User1, User2, User3];
+
+// Sérialisation
+function serializeUsers(users: IUser[]): string {
+  return JSON.stringify(users);
+}
+
+// Désérialisation avec restauration de méthodes
+function deserializeUsers(json: string): IUser[] {
+  const parsed = JSON.parse(json);
+  return parsed.map((user: any) => new User(user.id, user.name, user.age, user.scores));
+}
+
+// Sérialiser
+const serializedUsers = serializeUsers(users);
+console.log("Serialized Users:", serializedUsers);
+
+// Désérialiser
+const deserializedUsers = deserializeUsers(serializedUsers);
+console.log("Deserialized Users:", deserializedUsers);
+
+// Utiliser les méthodes restaurées
+deserializedUsers.forEach(user => {
+  console.log(\`User: \${user.name}, Max Score: \${user.getMaxScore()}, Average Score: \${user.getAverageScore()}\`);
+});
+
+// Affichage du 2e utilisateur
+const secondUser = deserializedUsers[1];
+console.log(\`Second User: \${secondUser.name}, Max Score: \${secondUser.getMaxScore()}, Average Score: \${secondUser.getAverageScore()}\`);`}</code></pre>
+
+    <p>
+      🔎 <strong>Remarque :</strong> après une désérialisation avec <code>JSON.parse</code>, les objets obtenus ne sont plus des instances de la classe <code>User</code>, mais des objets simples sans méthodes. Il faut donc les retransformer en vraies instances avec <code>new User(...)</code> pour pouvoir appeler <code>getMaxScore</code> et <code>getAverageScore</code>.
+    </p>
+  </article>
+)}
+
+
+{section.id === "11_generics" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez une classe <code>Queue</code> qui utilise les <strong>génériques</strong>. Cette classe doit avoir les méthodes suivantes :
+    </p>
+    <ul>
+      <li><code>enqueue(element: T)</code> : ajoute un élément à la queue.</li>
+      <li><code>dequeue()</code> : supprime et renvoie l'élément en tête de la queue. Si la queue est vide, cette méthode doit renvoyer <code>undefined</code>.</li>
+      <li><code>size()</code> : renvoie le nombre d'éléments dans la queue.</li>
+    </ul>
+    <p>
+      Créez une instance de <code>Queue</code> qui stocke des <strong>nombres</strong> et une autre qui stocke des <strong>chaînes de caractères</strong>. Testez les méthodes <code>enqueue</code>, <code>dequeue</code> et <code>size</code> sur ces instances.
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`class Queue<T> {
+  private queue: T[] = [];
+
+  enqueue(element: T): void {
+    this.queue.push(element);
+    console.log(\`Have push \${element} into the queue\`);
+  }
+
+  dequeue(): T | undefined {
+    const dequeuedElement = this.queue.shift();
+    console.log(\`Have pull \${dequeuedElement} out of the queue\`);
+    return dequeuedElement;
+  }
+
+  size(): number {
+    const size = this.queue.length;
+    console.log(\`The size of the queue: \${size}\`);
+    return size;
+  }
+}
+
+// ====== Test avec des nombres ======
+let numberQueue = new Queue<number>();
+numberQueue.enqueue(1);
+numberQueue.enqueue(2);
+numberQueue.size();       // 2
+numberQueue.dequeue();    // 1
+numberQueue.dequeue();    // 2
+numberQueue.size();       // 0
+numberQueue.dequeue();    // undefined
+
+// ====== Test avec des chaînes de caractères ======
+let stringQueue = new Queue<string>();
+stringQueue.enqueue("Hello");
+stringQueue.enqueue("World");
+stringQueue.size();       // 2
+stringQueue.dequeue();    // "Hello"
+stringQueue.dequeue();    // "World"
+stringQueue.size();       // 0
+stringQueue.dequeue();    // undefined`}</code></pre>
+
+    <p>
+      Ce code montre comment utiliser des <strong>types génériques</strong> en TypeScript pour créer une structure de données réutilisable et typée. La même classe <code>Queue</code> peut être utilisée pour n'importe quel type : nombres, chaînes, objets, etc.
+    </p>
+  </article>
+)}
+
+{section.id === "12_exceptions" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <ul>
+      <li>Créer la classe <code>Rectangle</code> avec les propriétés <code>longueur</code> et <code>largeur</code>, et un constructeur qui initialise ces propriétés.</li>
+      <li>Ajouter une méthode <code>calculerSurface</code> qui calcule la surface. Elle doit utiliser <code>throw</code> pour gérer les cas où les dimensions sont négatives, nulles ou non numériques.</li>
+      <li>Ajouter une méthode <code>essayerCalculerSurface</code> qui utilise un bloc <code>try-catch-finally</code> pour appeler <code>calculerSurface</code> et gérer les erreurs potentielles.</li>
+      <li>Créer plusieurs instances de <code>Rectangle</code> pour tester le bon fonctionnement de la gestion des exceptions.</li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`class Rectangle {
+  largeur: number;
+  longueur: number;
+
+  constructor(largeur: number, longueur: number) {
+    this.largeur = largeur;
+    this.longueur = longueur;
+  }
+
+  calculerSurface(): number {
+    if (this.largeur <= 0 || this.longueur <= 0) {
+      throw new Error("La largeur et la longueur doivent être supérieures à 0");
+    }
+    if (isNaN(this.largeur) || isNaN(this.longueur)) {
+      throw new Error("La largeur et la longueur doivent être des nombres");
+    }
+    return this.largeur * this.longueur;
+  }
+
+  essayerCalculerSurface() {
+    try {
+      console.log(\`Surface: \${this.calculerSurface()}\`);
+    } catch (e: any) {
+      console.error(e.message);
+    } finally {
+      console.log("Fin de la tentative de calcul de la surface.");
+    }
+  }
+}
+
+// Cas de test
+const rectangle1 = new Rectangle(5, 10);
+rectangle1.essayerCalculerSurface(); // ✅ Surface: 50
+
+const rectangle2 = new Rectangle(-5, 10);
+rectangle2.essayerCalculerSurface(); // ❌ Erreur : dimensions négatives
+
+const rectangle3 = new Rectangle(5, -10);
+rectangle3.essayerCalculerSurface(); // ❌ Erreur : dimensions négatives
+
+const rectangle4 = new Rectangle(5, NaN);
+rectangle4.essayerCalculerSurface(); // ❌ Erreur : dimensions non valides`}</code></pre>
+
+    <p>
+      Ce code montre comment utiliser les <strong>exceptions</strong> pour gérer les erreurs liées aux données invalides dans une classe TypeScript, et comment utiliser les blocs <code>try-catch-finally</code> pour sécuriser l'exécution.
+    </p>
+  </article>
+)}
+
+
+{section.id === "13_async_await" && (
+  <article>
+    <h4>📝 Exercice 1 :</h4>
+    <p>
+      Créez une fonction <code>calculateSumAsync</code> qui prend deux nombres comme arguments et retourne une promesse qui se résout à leur somme après 3 secondes.
+    </p>
+    <p>
+      Utilisez <code>async</code> et <code>await</code> dans une fonction <code>printSum</code> pour appeler <code>calculateSumAsync</code>. Cette fonction doit afficher "Calcul en cours..." puis le résultat une fois disponible.
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`function calculateSumAsync(a: number, b: number): Promise<number> {
+  return new Promise<number>((resolve) => {
+    setTimeout(() => {
+      resolve(a + b);
+    }, 3000);
+  });
+}
+
+async function printSum(a: number, b: number): Promise<void> {
+  console.log("Calcul en cours...");
+  const sum = await calculateSumAsync(a, b);
+  console.log(\`La somme est : \${sum}\`);
+}
+
+// Test
+printSum(5, 10);`}</code></pre>
+
+    <hr />
+
+    <h4>📝 Exercice 2 :</h4>
+    <p>
+      Créez une fonction <code>verifyUser</code> qui prend un nom d'utilisateur et un mot de passe. Elle retourne une promesse résolue si les identifiants sont corrects, ou rejetée sinon.
+    </p>
+    <p>
+      Utilisez <code>then</code> et <code>catch</code> pour gérer la promesse : afficher un message de bienvenue ou une erreur.
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`function verifyUser(User: string, password: string): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    const success = (User === password);
+    setTimeout(() => {
+      if (success) {
+        resolve("Bienvenue!");
+      } else {
+        reject(new Error("Erreur: Utilisateur ou mot de passe incorrect"));
+      }
+    }, 2000);
+  });
+}
+
+// Utilisation
+verifyUser("mobsf", "mobsf")
+  .then((retour) => console.log(retour))
+  .catch((error) => console.error(error.message));
+
+verifyUser("mobsf", "mobsf1")
+  .then((retour) => console.log(retour))
+  .catch((error) => console.error(error.message));`}</code></pre>
+
+    <hr />
+
+    <h4>📝 Exercice 3 :</h4>
+    <p>
+      Reprenez les exercices précédents mais cette fois-ci en utilisant des classes :
+    </p>
+    <ul>
+      <li><code>Calculator</code> pour encapsuler <code>calculateSumAsync</code></li>
+      <li><code>User</code> pour encapsuler <code>verifyUser</code></li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`class Calculator {
+  calculateSumAsync(a: number, b: number): Promise<number> {
+    return new Promise<number>((resolve) => {
+      setTimeout(() => {
+        resolve(a + b);
+      }, 3000);
+    });
+  }
+}
+
+async function printsum(a: number, b: number): Promise<void> {
+  console.log("Calcul en cours...");
+  const calculator = new Calculator();
+  const sum = await calculator.calculateSumAsync(a, b);
+  console.log(\`La somme est : \${sum}\`);
+}
+
+// Test
+printsum(5, 10);
+
+class User_tp13 {
+  private username: string;
+  private password: string;
+
+  constructor(username: string, password: string) {
+    this.username = username;
+    this.password = password;
+  }
+
+  verifyUser(inputUsername: string, inputPassword: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const success = (this.username === inputUsername && this.password === inputPassword);
+      setTimeout(() => {
+        if (success) {
+          resolve(\`Bienvenue, \${this.username}!\`);
+        } else {
+          reject(new Error("Erreur: Utilisateur ou mot de passe incorrect"));
+        }
+      }, 2000);
+    });
+  }
+}
+
+// Test de la classe User
+const user = new User_tp13("mobsf", "password123");
+
+user.verifyUser("mobsf", "password123")
+  .then((message) => console.log(message))
+  .catch((error) => console.error(error.message));
+
+user.verifyUser("mobsf", "wrongpassword")
+  .then((message) => console.log(message))
+  .catch((error) => console.error(error.message));`}</code></pre>
+
+    <p>
+      Ces exercices démontrent l'utilisation des <strong>promesses</strong>, de <strong>async/await</strong> et de la <strong>programmation orientée objet</strong> avec TypeScript.
+    </p>
+  </article>
+)}
+
+
+{section.id === "14_fetch" && (
+  <article>
+    <h4>📝 Exercice 1 :</h4>
+    <p>
+      Afficher les propriétés de chaque tremblement de terre dans le navigateur. Faites en sorte que le script s'exécute côté client et soit servi avec un serveur Astro.
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <p>
+      Comme pour les exercices précédents, créez un projet Astro et modifiez le fichier <code>src/pages/index.astro</code> pour inclure un fichier TypeScript côté client depuis <code>src/scripts</code>.
+    </p>
+    <p>Le fichier TypeScript contient le code suivant :</p>
+
+    <pre><code class="language-ts" is:raw>{`interface Earthquake {
+  properties: {
+    time: number;
+    place: string;
+    mag: number;
+  };
+}
+
+class EarthquakeService {
+  private async getEarthquakesFromUSGS(): Promise<Earthquake[]> {
+    const response = await fetch(
+      "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=yesterday&endtime=today&minmagnitude=4"
+    );
+    const earthquakejson = await response.json();
+    return earthquakejson.features;
+  }
+
+  async displayEarthquakes() {
+    try {
+      const earthquakes = await this.getEarthquakesFromUSGS();
+      const ul = document.createElement("ul");
+
+      earthquakes.forEach((earthquake) => {
+        const date = new Date(earthquake.properties.time);
+        const options = {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          timeZone: "Europe/Paris",
+        };
+        const dateString = date.toLocaleDateString("fr-FR", options);
+        const finalString = dateString + " - " + earthquake.properties.mag + " - " + earthquake.properties.place;
+        console.log(finalString);
+
+        const li = document.createElement("li");
+        li.textContent = finalString;
+        ul.appendChild(li);
+      });
+
+      document.body.appendChild(ul);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des tremblements de terre :", error);
+    }
+  }
+}
+
+const earthquakeService = new EarthquakeService();
+earthquakeService.displayEarthquakes();`}</code></pre>
+
+    <hr />
+
+    <h4>📝 Exercice 2 :</h4>
+    <p>
+      Créez une interface <code>Address</code> pour représenter les résultats de recherche d'adresse, en extrayant les champs depuis <code>properties</code> dans les objets de type Feature.
+    </p>
+    <p>
+      Créez une classe <code>AddressService</code> avec une méthode <code>searchAddress(query, limit)</code> qui effectue une requête <code>GET</code> à l'API <a href="https://api-adresse.data.gouv.fr/search/" target="_blank">api-adresse.data.gouv.fr</a> et retourne les résultats.
+    </p>
+    <p>
+      Affichez ensuite les résultats dans la console et sur la page web, en formatant les propriétés souhaitées. Gérez aussi les erreurs de manière appropriée.
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <pre><code class="language-ts" is:raw>{`interface Address {
+  properties: {
+    city: string;
+    postcode: number;
+    street: string;
+    houseNumber: number;
+    context: string;
+    lat: number;
+    lon: number;
+  };
+}
+
+class AddressService {
+  async searchAddress(query: string, limit: number): Promise<any> {
+    try {
+      const encodedQuery = encodeURIComponent(query);
+      const url = \`https://api-adresse.data.gouv.fr/search/?q=\${encodedQuery}&limit=\${limit}\`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la requête : " + response.statusText);
+      }
+
+      const data = await response.json();
+      return data.features;
+    } catch (error) {
+      console.error("Une erreur est survenue lors de la recherche d'adresse :", error);
+      throw error;
+    }
+  }
+
+  displayResults(results: any[]): void {
+    console.log("Résultats de la recherche :", results);
+
+    const resultContainer = document.getElementById("results") || document.createElement("ul");
+    resultContainer.id = "results";
+    resultContainer.innerHTML = "";
+
+    results.forEach((result) => {
+      const {
+        city = "N/A",
+        postcode = "N/A",
+        street = "N/A",
+        housenumber = "N/A",
+        context = "N/A"
+      } = result.properties;
+
+      const [lon = "N/A", lat = "N/A"] = result.geometry.coordinates;
+
+      const listItem = document.createElement("li");
+      listItem.textContent = \`City: \${city}, Postcode: \${postcode}, Street: \${street}, House Number: \${housenumber}, Context: \${context}, Latitude: \${lat}, Longitude: \${lon}\`;
+      resultContainer.appendChild(listItem);
+    });
+
+    if (!document.body.contains(resultContainer)) {
+      document.body.appendChild(resultContainer);
+    }
+  }
+}
+
+const addressService = new AddressService();
+addressService.searchAddress("8 bd du port", 5)
+  .then((results) => {
+    addressService.displayResults(results);
+  })
+  .catch((error) => {
+    console.error("Erreur :", error.message);
+  });`}</code></pre>
+
+    <p>
+      Ces deux exercices vous permettent de pratiquer l'utilisation de <strong>fetch</strong> pour des appels API réels, le traitement JSON, et l'affichage dynamique des données sur une page web côté client avec TypeScript.
+    </p>
+  </article>
+)}
+
+
+{section.id === "15_cors" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Faites une application qui s'exécute côté <strong>serveur</strong> (pour ne pas être bloqué par CORS) et qui affiche une liste des titres de la playlist 
+      <a href="https://api.deezer.com/playlist/11846226041" target="_blank">Top 100 France 2023</a>.
+    </p>
+    <p>
+      L'affichage doit être une liste <code>&lt;ul&gt;</code> dont chaque élément <code>&lt;li&gt;</code> contient :
+    </p>
+    <ul>
+      <li>Un index (à partir de <code>0</code> ou <code>1</code>)</li>
+      <li>Le <strong>titre de la chanson</strong></li>
+      <li>Le <strong>nom de l'artiste</strong></li>
+      <li>Le <strong>titre de l'album</strong></li>
+      <li>La <strong>miniature</strong> de l'album via <code>cover_small</code> (balise <code>&lt;img&gt;</code>)</li>
+      <li>Un <strong>lecteur audio</strong> (balise <code>&lt;audio&gt;</code>) avec <code>controls</code> et <code>preload="none"</code></li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <p>
+      Commencez par créer un projet Astro, puis modifiez le fichier <code>src/pages/index.astro</code> pour qu'il contienne un script client de test comme suit :
+    </p>
+
+    <pre><code class="language-html" is:raw>{`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Deezer API</title>
+</head>
+<body>
+  <h1>Test Deezer API</h1>
+  <script>
+    fetch("https://api.deezer.com/playlist/11846226041")
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error("CORS Error:", error));
+  </script>
+</body>
+</html>`}</code></pre>
+
+    <p>Ensuite, créez un serveur <code>express</code> dans <code>src/scripts/app.ts</code> avec le contenu suivant :</p>
+
+    <pre><code class="language-ts" is:raw>{`import express from "express";
+
+const app = express();
+const PORT = 3000;
+
+interface DeezerPlaylist {
+  tracks: {
+    data: Datum[];
+  };
+}
+
+interface Datum {
+  title: string;
+  artist: {
+    name: string;
+  };
+  album: {
+    title: string;
+    cover_small: string;
+  };
+  preview: string;
+}
+
+app.get("/", async (req, res) => {
+  try {
+    const response = await fetch("https://api.deezer.com/playlist/11846226041");
+    const data: DeezerPlaylist = await response.json();
+
+    let html = \`
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Top 100 France 2023</title>
+      </head>
+      <body>
+        <h1>Top 100 France 2023</h1>
+        <ul>
+    \`;
+
+    data.tracks.data.forEach((track, index) => {
+      html += \`
+        <li>
+          <h3>\${index + 1}. \${track.title}</h3>
+          <p>\${track.artist.name}</p>
+          <p>\${track.album.title}</p>
+          <img src="\${track.album.cover_small}" alt="cover">
+          <audio controls preload="none">
+            <source src="\${track.preview}" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'audio.
+          </audio>
+        </li>
+      \`;
+    });
+
+    html += \`
+        </ul>
+      </body>
+      </html>
+    \`;
+
+    res.send(html);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données :", error);
+    res.status(500).send("Erreur serveur.");
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(\`Serveur démarré sur http://localhost:\${PORT}\`);
+});`}</code></pre>
+
+    <p>
+      Ce code contourne les erreurs CORS en exécutant la requête vers l’API Deezer côté serveur. Il transforme ensuite les résultats en une page HTML dynamique affichée au client.
+    </p>
+  </article>
+)}
+
+
+{section.id === "16_http_crud" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Modifiez le fichier <code>app.ts</code> pour bien gérer les <strong>modifications des relations</strong> entre les restaurants et les catégories :
+    </p>
+    <ul>
+      <li>✔️ À chaque suppression/modification d'une <strong>catégorie</strong>, mettez à jour les <code>categoryIds</code> de tous les restaurants qui la contiennent.</li>
+      <li>✔️ À chaque suppression/modification d'un <strong>restaurant</strong>, mettez à jour les <code>restaurantIds</code> de toutes les catégories qui le contiennent.</li>
+      <li>✔️ Dans les deux cas, modifiez aussi les relations dans <code>restaurantCategories</code>.</li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <p>Voici un extrait de code TypeScript représentatif de la solution complète :</p>
+
+    <pre><code class="language-ts" is:raw>{`interface AlloResto {
+  restaurants: Restaurant[];
+  categories: Category[];
+  restaurantCategories: RestaurantCategory[];
+}
+
+interface Category {
+  id?: string;
+  name?: string;
+  restaurantIds?: string[];
+}
+
+interface RestaurantCategory {
+  restaurantId?: string;
+  categoryId?: string;
+}
+
+interface Restaurant {
+  id?: string;
+  name?: string;
+  description?: string;
+  categoryIds?: string[];
+}
+
+// Définition de clients génériques HTTP (CRUD)
+abstract class HttpClient<T> {
+  protected url: string;
+  protected options: RequestInit;
+
+  constructor(url: string) {
+    this.url = url;
+    this.options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+  }
+
+  public async execute(): Promise<T | void> {
+    try {
+      const response = await fetch(this.url, this.options);
+      if (response.ok) {
+        const data: T = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Fetch error: ", error);
+    }
+  }
+}
+
+class CreateClient<T> extends HttpClient<T> {
+  constructor(url: string, data: T) {
+    super(url);
+    this.options.method = "POST";
+    this.options.body = JSON.stringify(data);
+  }
+}
+
+class ReadClient<T> extends HttpClient<T> {
+  constructor(url: string) {
+    super(url);
+    this.options.method = "GET";
+  }
+}
+
+class UpdateClient<T> extends HttpClient<T> {
+  constructor(url: string, data: T) {
+    super(url);
+    this.options.method = "PATCH";
+    this.options.body = JSON.stringify(data);
+  }
+}
+
+class DeleteClient<T> extends HttpClient<T> {
+  constructor(url: string) {
+    super(url);
+    this.options.method = "DELETE";
+  }
+}
+
+// Exemple : suppression d'une catégorie
+const deleteCategoryClient = new DeleteClient<Category>("http://localhost:3000/categories/71b2");
+deleteCategoryClient.execute().then((category) => {
+  if (category) {
+    console.log("DELETE Category :", category);
+
+    const readRestaurants = new ReadClient<Restaurant[]>("http://localhost:3000/restaurants");
+    readRestaurants.execute().then((restaurants) => {
+      if (restaurants) {
+        restaurants.forEach((r) => {
+          if (r.categoryIds?.includes(category.id!)) {
+            const updated = r.categoryIds.filter((id) => id !== category.id);
+            new UpdateClient<Restaurant>(\`http://localhost:3000/restaurants/\${r.id}\`, {
+              categoryIds: updated,
+            }).execute();
+          }
+        });
+      }
+    });
+
+    const readRelations = new ReadClient<RestaurantCategory[]>("http://localhost:3000/restaurantCategories");
+    readRelations.execute().then((relations) => {
+      if (relations) {
+        const filtered = relations.filter((rel) => rel.categoryId !== category.id);
+        new UpdateClient<RestaurantCategory[]>("http://localhost:3000/restaurantCategories", filtered).execute();
+      }
+    });
+  }
+});
+
+// Exemple : suppression d'un restaurant
+const deleteRestaurantClient = new DeleteClient<Restaurant>("http://localhost:3000/restaurants/3aa8");
+deleteRestaurantClient.execute().then((restaurant) => {
+  if (restaurant) {
+    console.log("DELETE Restaurant :", restaurant);
+
+    const readCategories = new ReadClient<Category[]>("http://localhost:3000/categories");
+    readCategories.execute().then((categories) => {
+      if (categories) {
+        categories.forEach((c) => {
+          if (c.restaurantIds?.includes(restaurant.id!)) {
+            const updated = c.restaurantIds.filter((id) => id !== restaurant.id);
+            new UpdateClient<Category>(\`http://localhost:3000/categories/\${c.id}\`, {
+              restaurantIds: updated,
+            }).execute();
+          }
+        });
+      }
+    });
+
+    const readRelations = new ReadClient<RestaurantCategory[]>("http://localhost:3000/restaurantCategories");
+    readRelations.execute().then((relations) => {
+      if (relations) {
+        const filtered = relations.filter((rel) => rel.restaurantId !== restaurant.id);
+        new UpdateClient<RestaurantCategory[]>("http://localhost:3000/restaurantCategories", filtered).execute();
+      }
+    });
+  }
+});`}</code></pre>
+
+    <p>
+      🔁 <strong>Remarque</strong> : chaque opération <code>DELETE</code> déclenche la mise à jour des entités liées (restaurants ou catégories), puis la mise à jour des relations dans <code>restaurantCategories</code>.
+    </p>
+    <p>
+      Ce fonctionnement garantit la cohérence des relations même après suppression ou modification de données.
+    </p>
+  </article>
+)}
+
 
     {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" &&  section.id !== "03_modules" && section.id !== "04_client_server" && section.id !== "05_html_css_punto" &&
-    section.id !== "06_css_flexbox" && section.id !== "07_fat_arrow" &&(
+    section.id !== "06_css_flexbox" && section.id !== "07_fat_arrow" && section.id !== "08_map_reduce" && section.id !== "09_obejcts" && section.id !== "10_json" &&
+    section.id !== "11_generics" &&section.id !== "12_exceptions" &&section.id !== "13_async_await" &&section.id !== "14_fetch" &&section.id !== "15_cors" &&
+    section.id !== "16_http_crud" &&(
   <p>这里是 {section.title} 的内容展示区。</p>
 )}
   </section>
