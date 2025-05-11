@@ -7,7 +7,6 @@ async function fetchTemperatureData(lat, lon) {
   const dailyTemps = data.daily.temperature_2m_max;
   const dates = data.daily.time;
 
-  // 平均每年的温度
   const yearTemps = {};
   dates.forEach((date, index) => {
     const year = date.slice(0, 4);
@@ -69,7 +68,7 @@ function weatherCodeToText(code) {
 
 function renderChart(labels, data) {
   const ctx = document.getElementById("chart").getContext("2d");
-  if (window.tempChart) window.tempChart.destroy(); // 销毁旧图
+  if (window.tempChart) window.tempChart.destroy();
 
   window.tempChart = new Chart(ctx, {
     type: 'line',

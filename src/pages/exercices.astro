@@ -1427,13 +1427,102 @@ deleteRestaurantClient.execute().then((restaurant) => {
   </article>
 )}
 
+{section.id === "17_forms" && (
+  <article>
+    <p>Je sais pas comment faire</p>
+  </article>
+)}
 
-    {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" &&  section.id !== "03_modules" && section.id !== "04_client_server" && section.id !== "05_html_css_punto" &&
+{section.id === "18_web_components" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez un nouvel élément HTML personnalisé appelé <code>&lt;date-time&gt;</code> qui affiche la date et l'heure actuelles.
+    </p>
+    <p>
+      Créez un autre élément HTML personnalisé appelé <code>&lt;greet-custom&gt;</code> qui affiche un message de salutation personnalisé en fonction de l'heure de la journée (par exemple, "Bonjour" le matin, "Bon après-midi" l'après-midi, "Bonsoir" le soir).
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <p>
+      Comme pour les exercices précédents, commencez par créer un projet Astro. Ensuite, modifiez le fichier <code>src/pages/index.astro</code> pour y inclure les composants personnalisés :
+    </p>
+
+    <pre><code>{`---
+---
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Web Components Demo</title>
+    <script type="module" src="/src/scripts/app.ts"></script>
+  </head>
+  <body>
+    <h1>Démo des Web Components</h1>
+
+    <p>Voici la date et l'heure actuelle : <date-time></date-time></p>
+
+    <p>Message de salutation personnalisé : <greet-custom></greet-custom></p>
+  </body>
+</html>`}</code></pre>
+
+    <p>
+      Ensuite, créez un fichier <code>src/scripts/app.ts</code> avec le code suivant :
+    </p>
+
+    <pre><code class="language-ts">{`class DateTimeElement extends HTMLElement {
+  connectedCallback() {
+    this.updateTime();
+    setInterval(() => this.updateTime(), 1000); 
+  }
+
+  updateTime() {
+    const now = new Date();
+    this.textContent = now.toLocaleString(); 
+  }
+}
+customElements.define('date-time', DateTimeElement);
+
+class GreetCustomElement extends HTMLElement {
+  connectedCallback() {
+    const hour = new Date().getHours();
+    let greeting = '';
+
+    if (hour >= 5 && hour < 12) {
+      greeting = 'Bonjour';
+    } else if (hour >= 12 && hour < 18) {
+      greeting = 'Bon après-midi';
+    } else {
+      greeting = 'Bonsoir';
+    }
+
+    this.textContent = \`\${greeting} !\`;
+  }
+}
+customElements.define('greet-custom', GreetCustomElement);`}</code></pre>
+
+    <p>
+      🔎 <strong>Explication :</strong>
+    </p>
+    <ul>
+      <li><code>&lt;date-time&gt;</code> est mis à jour automatiquement toutes les secondes avec l'heure locale grâce à <code>setInterval()</code>.</li>
+      <li><code>&lt;greet-custom&gt;</code> choisit une salutation en fonction de l'heure du jour via <code>new Date().getHours()</code>.</li>
+    </ul>
+
+    <p>
+      Ces deux composants utilisent l'API native <code>customElements.define()</code> pour créer des balises HTML personnalisées et dynamiques côté client.
+    </p>
+  </article>
+)}
+
+
+
+
+    {/* {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" &&  section.id !== "03_modules" && section.id !== "04_client_server" && section.id !== "05_html_css_punto" &&
     section.id !== "06_css_flexbox" && section.id !== "07_fat_arrow" && section.id !== "08_map_reduce" && section.id !== "09_obejcts" && section.id !== "10_json" &&
     section.id !== "11_generics" &&section.id !== "12_exceptions" &&section.id !== "13_async_await" &&section.id !== "14_fetch" &&section.id !== "15_cors" &&
     section.id !== "16_http_crud" &&(
   <p>这里是 {section.title} 的内容展示区。</p>
-)}
+)} */}
   </section>
 ))}
     </main>
