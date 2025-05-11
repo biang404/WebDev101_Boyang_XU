@@ -239,10 +239,274 @@ document.body.appendChild(div);
   </article>
 )}
 
+{section.id === "04_client_server" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Regardez bien tous les fichiers source fournis dans le projet Astro.
+      <code>index.astro</code> et <code>moduleWeatherServerSide.ts</code> sont dans le dossier <code>src/pages</code> et
+      <code>app.ts</code> ainsi que <code>moduleWeatherClientSide.ts</code> sont dans le dossier <code>src/scripts</code>.
+    </p>
+    <p>
+      Ajoutez des <code>console.log("message")</code> juste avant les <code>return</code> (en changeant "message" par ce que vous voulez)
+      dans les fonctions <code>getCurrentHumidity</code>, <code>getCurrentWind</code>, <code>getCurrentTemperature</code> et <code>getCurrentCloudCover</code>.
+    </p>
+    <p>
+      Où s'affichent les 4 messages ? Dans le terminal du serveur Astro ou dans la console du navigateur ? Pourquoi ?
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <h5># Différence d'affichage des messages entre le serveur et le client</h5>
+
+    <h6>## Observation</h6>
+    <ul>
+      <li>🖥️ Les messages de <strong>Temperature</strong> et <strong>Cloud Cover</strong> se trouvent dans le <em>terminal du serveur Astro</em>.</li>
+      <li>🌐 Les messages de <strong>Humidity</strong> et <strong>Wind Speed</strong> se trouvent dans la <em>console du navigateur</em>.</li>
+    </ul>
+
+    <h6>## Explication</h6>
+
+    <h6>### Côté serveur :</h6>
+    <p>
+      Les fonctions <code>getCurrentTemperature</code> et <code>getCurrentCloudCover</code> sont exécutées lors du rendu côté serveur, c’est-à-dire avant que la page ne soit envoyée au navigateur.
+    </p>
+    <p>
+      Astro exécute ces fonctions sur le serveur (dans Node.js ou un environnement similaire) pour générer le HTML avec les données déjà intégrées.
+      Ainsi, les <code>console.log</code> situés dans ces fonctions s’affichent dans le terminal du serveur, et non dans le navigateur.
+    </p>
+
+    <h6>### Côté client :</h6>
+    <p>
+      Les fonctions <code>getCurrentHumidity</code> et <code>getCurrentWind</code> sont appelées dans du code exécuté <strong>après le chargement de la page</strong>, directement dans le navigateur via un script côté client.
+    </p>
+    <p>
+      Par conséquent, leurs <code>console.log</code> apparaissent dans la console des outils de développement du navigateur, et non sur le serveur.
+    </p>
+
+    <p><strong>Conclusion :</strong> Cela illustre la différence entre le code exécuté <em>à la construction de la page</em> (serveur) et le code exécuté <em>après le chargement de la page</em> (client).</p>
+  </article>
+)}
+
+{section.id === "05_html_css_punto" && (
+  <article>
+    <p>Ceci est mon mini-projet. Veuillez cliquer sur le lien <strong>Punto</strong> dans la barre de navigation pour voir le résultat.</p>
+  </article>
+)}
+
+{section.id === "06_css_flexbox" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Faites les 4 exercices suivants. Pour le rendu du TP, créez un fichier HTML et un fichier CSS pour chaque exercice, et mettez les 4 exercices dans un dossier <code>06_CSS_flexbox</code> dans votre dépôt git. N'oubliez pas de lier vos fichiers HTML et CSS.
+    </p>
+    <ul>
+      <li><a href="https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox_skills#disposition_flexible_1" target="_blank">Disposition flexible 1</a></li>
+      <li><a href="https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox_skills#disposition_flexible_2" target="_blank">Disposition flexible 2</a></li>
+      <li><a href="https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox_skills#disposition_flexible_3" target="_blank">Disposition flexible 3</a></li>
+      <li><a href="https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox_skills#disposition_flexible_4" target="_blank">Disposition flexible 4</a></li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+
+    <h5>🎯 Exercice 1 : Navigation horizontale</h5>
+    <p>
+      👉 Le code HTML peut être consulté ici :  
+      <a href="https://github.com/mdn/css-examples/blob/main/learn/tasks/flexbox/flexbox1-download.html" target="_blank">flexbox1-download.html</a>
+    </p>
+    <p><strong>task1.css</strong></p>
+    <pre><code class="language-css" is:raw>{`nav ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+}`}</code></pre>
+
+    <h5>🎯 Exercice 2 : Répartition horizontale de 3 blocs</h5>
+    <p>
+      👉 Le code HTML peut être consulté ici :  
+      <a href="https://github.com/mdn/css-examples/blob/main/learn/tasks/flexbox/flexbox2-download.html" target="_blank">flexbox2-download.html</a>
+    </p>
+    <p><strong>task2.css</strong></p>
+    <pre><code class="language-css" is:raw>{`ul {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.5em 0;
+}`}</code></pre>
+
+    <h5>🎯 Exercice 3 : Centrage vertical et horizontal</h5>
+    <p>
+      👉 Le code HTML peut être consulté ici :  
+      <a href="https://github.com/mdn/css-examples/blob/main/learn/tasks/flexbox/flexbox3-download.html" target="_blank">flexbox3-download.html</a>
+    </p>
+    <p><strong>task3.css</strong></p>
+    <pre><code class="language-css" is:raw>{`.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.child {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+}`}</code></pre>
+
+    <h5>🎯 Exercice 4 : Grille responsive en 3 lignes</h5>
+    <p>
+      👉 Le code HTML peut être consulté ici :  
+      <a href="https://github.com/mdn/css-examples/blob/main/learn/tasks/flexbox/flexbox4-download.html" target="_blank">flexbox4-download.html</a>
+    </p>
+    <p><strong>task4.css</strong></p>
+    <pre><code class="language-css" is:raw>{`ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  height: 100vh;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #4d7298;
+  border: 2px solid #77a6b6;
+  border-radius: 0.5em;
+  color: #fff;
+  padding: 0.5em;
+  margin: 0.5em;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+li:nth-child(-n+4) {
+  flex: 1 1 calc(25% - 1em);
+  height: calc(33.33% - 1em);
+}
+
+li:nth-child(n+5):nth-child(-n+7),
+li:nth-child(n+8) {
+  flex: 1 1 calc(33.33% - 1em);
+  height: calc(33.33% - 1em);
+}`}</code></pre>
+
+    <p>📁 Tous les fichiers CSS ci-dessus sont placés dans le dossier <code>06_CSS_flexbox</code> conformément à l'instruction du TP.</p>
+  </article>
+)}
 
 
+{section.id === "07_fat_arrow" && (
+  <article>
+    <h4>📝 Exercice 1 :</h4>
+    <p>
+      Faites un projet Astro et faites en sorte que le fichier <code>app.ts</code> soit exécuté dans le navigateur (côté client). Cela permet d'accéder à l'objet <code>document</code> qui représente la page web affichée dans le navigateur.
+    </p>
+    <p>
+      Ajoutez un <code>addEventListener</code> sur le <code>document</code> pour afficher les coordonnées du clic de la souris.
+    </p>
 
-    {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" &&  section.id !== "03_modules" &&(
+    <h4>✅ Réponse :</h4>
+    <p>
+      Veuillez d'abord créer un projet Astro comme dans les exercices précédents, puis remplacez le fichier <code>src/pages/index.astro</code> avec le code minimal qui appelle un fichier <code>app.ts</code> situé dans le dossier <code>src/scripts</code>.
+    </p>
+    <p>Le contenu du fichier <code>app.ts</code> est le suivant :</p>
+    <pre><code class="language-ts" is:raw>{`document.addEventListener("click", (event: MouseEvent) => {
+  console.log(\`x: \${event.clientX}, y: \${event.clientY}\`);
+});`}</code></pre>
+
+    <hr />
+
+    <h4>📝 Exercice 2 :</h4>
+    <p>
+      Faites une application de calculatrice :
+    </p>
+    <ul>
+      <li>Créez une fonction fléchée <code>additionner</code> qui prend deux nombres et retourne leur somme.</li>
+      <li>Créez une fonction fléchée <code>soustraire</code> qui retourne la différence.</li>
+      <li>Créez une fonction fléchée <code>multiplier</code> qui retourne le produit.</li>
+      <li>Créez une fonction fléchée <code>diviser</code> qui retourne le quotient.</li>
+      <li>
+        Créez une fonction fléchée <code>calculatrice</code> qui prend deux nombres et une chaîne représentant l’opération, puis affiche le résultat de l’opération.
+      </li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <p>Voici le contenu du fichier <code>app.ts</code> correspondant à cette calculatrice :</p>
+    <pre><code class="language-ts" is:raw>{`const additionner = (a: number, b: number): number => a + b;
+const soustraire = (a: number, b: number): number => a - b;
+const multiplier = (a: number, b: number): number => a * b;
+const diviser = (a: number, b: number): number => a / b;
+
+const calculatrice = (a: number, b: number, operation: string): void => {
+  let resultat: number;
+
+  switch (operation) {
+    case "additionner":
+      resultat = additionner(a, b);
+      break;
+    case "soustraire":
+      resultat = soustraire(a, b);
+      break;
+    case "multiplier":
+      resultat = multiplier(a, b);
+      break;
+    case "diviser":
+      resultat = diviser(a, b);
+      break;
+    default:
+      console.log("Opération non reconnue.");
+      return;
+  }
+
+  console.log(\`\${operation}(\${a}, \${b}) = \${resultat}\`);
+};
+
+// Exemple d'appel :
+calculatrice(10, 5, "additionner");
+calculatrice(10, 5, "soustraire");
+calculatrice(10, 5, "multiplier");
+calculatrice(10, 5, "diviser");`}</code></pre>
+
+    <hr />
+
+    <h4>📝 Exercice 3 :</h4>
+    <p>
+      Faites une application qui affiche les coordonnées de la souris toutes les secondes.
+      Vous pouvez vous aider de la documentation de l'objet <code>MouseEvent</code> :
+      <a href="https://developer.mozilla.org/fr/docs/Web/API/MouseEvent" target="_blank">MDN MouseEvent</a>
+    </p>
+
+    <h4>✅ Réponse :</h4>
+    <p>Voici le contenu du fichier <code>app.ts</code> :</p>
+    <pre><code class="language-ts" is:raw>{`let mouseX: number = 0;
+let mouseY: number = 0;
+
+document.addEventListener("mousemove", (event: MouseEvent) => {
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+});
+
+setInterval(() => {
+  console.log(\`x: \${mouseX}, y: \${mouseY}\`);
+}, 1000);`}</code></pre>
+  </article>
+)}
+
+
+    {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" &&  section.id !== "03_modules" && section.id !== "04_client_server" && section.id !== "05_html_css_punto" &&
+    section.id !== "06_css_flexbox" && section.id !== "07_fat_arrow" &&(
   <p>这里是 {section.title} 的内容展示区。</p>
 )}
   </section>
