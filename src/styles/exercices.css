@@ -86,14 +86,17 @@ scroll-margin-top: 60px;
 border-bottom: 1px solid #ddd;
 padding-bottom: 0.5rem;
 
-code {
-  font-size: 1em;        /* 正常大小 */
-  font-weight: bold;     /* 加粗 */
-  color: orange;         /* 橙色 */
-  background: none;      /* 去掉灰色背景 */
-  padding: 0;            /* 去掉内边距 */
-  border-radius: 0;      /* 去掉圆角 */
+
+:where(main) code {
+  font-size: 1em !important;     
+  font-weight: bold !important;  
+  color: orange !important;      
+  background: none !important;   
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-family: inherit !important;
 }
+
 
 pre {
   background-color: #f6f8fa;
