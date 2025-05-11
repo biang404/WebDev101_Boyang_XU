@@ -146,6 +146,101 @@ document.body.appendChild(appDiv);
   </article>
 )}
 
+    {section.id === "03_modules" && (
+  <article>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez une application avec trois fichiers : <code>calculJours.ts</code>, <code>moduleVacances.ts</code> et <code>moduleTravail.ts</code> qui utilisent des modules pour calculer le nombre de jours de vacances restants et le nombre de jours de travail restants pour un employé.
+    </p>
+    <ul>
+      <li>
+        Dans les deux modules <code>moduleVacances.ts</code> et <code>moduleTravail.ts</code>, créez la fonction <code>calculerJoursRestants</code> avec le même nom dans les deux modules, qui prend en paramètre le nombre de jours de vacances ou de travail déjà pris et retourne le nombre de jours restants.
+      </li>
+      <li>
+        Exportez la fonction avec <code>export</code> dans les deux modules.
+      </li>
+      <li>
+        Dans le fichier <code>calculJours.ts</code>, importez les deux modules et utilisez la fonction <code>calculerJoursRestants</code> pour afficher le nombre de jours de vacances et de travail restants pour un employé. Résolvez le conflit de nom entre les deux modules.
+      </li>
+      <li>
+        Affichez les résultats dans des balises <code>div</code> avec <code>createElement</code> et <code>appendChild</code>.
+      </li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+    <p>
+      Commencez par créer un projet Astro comme expliqué dans les exercices précédents.
+    </p>
+    <p>
+      Ensuite, remplacez le contenu du fichier <code>src/pages/index.astro</code> par :
+    </p>
+
+    <pre><code class="language-html">
+---
+---
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;WebDev101 Telecom Paris&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src="../scripts/calculJours.ts"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+
+    <p>
+      Ensuite, dans le dossier <code>src</code>, créez un sous-dossier <code>scripts</code>, puis ajoutez-y les trois fichiers suivants avec le contenu correspondant :
+    </p>
+
+    <p><strong>moduleVacances.ts</strong></p>
+    <pre><code class="language-ts">
+export function calculerJoursRestants(joursPris: number): number {
+  return 30 - joursPris;
+}
+    </code></pre>
+
+    <p><strong>moduleTravail.ts</strong></p>
+    <pre><code class="language-ts">
+export function calculerJoursRestants(joursPris: number): number {
+  return 218 - joursPris;
+}
+    </code></pre>
+
+    <p><strong>calculJours.ts</strong></p>
+    <pre><code class="language-ts">
+import * as Vacances from "./moduleVacances.ts";
+import * as Travail from "./moduleTravail.ts";
+
+const joursVacancesRestants = Vacances.calculerJoursRestants(10);
+const joursTravailRestants = Travail.calculerJoursRestants(30);
+
+const div = document.createElement("div");
+div.id = "resultats";
+
+const vacancesEl = document.createElement("p");
+vacancesEl.textContent = `Jours de vacances restants : ${joursVacancesRestants}`;
+
+const travailEl = document.createElement("p");
+travailEl.textContent = `Jours de travail restants : ${joursTravailRestants}`;
+
+div.appendChild(vacancesEl);
+div.appendChild(travailEl);
+document.body.appendChild(div);
+    </code></pre>
+
+    <p>
+      Cette solution montre comment utiliser deux modules différents ayant une fonction portant le même nom, et gérer le conflit grâce à des alias d'importation (ici avec <code>* as</code>).
+    </p>
+  </article>
+)}
+
+
+
+
     {section.id !== "01_hello_world_ts" && section.id !== "02_hello_astro_typescript" && (
   <p>这里是 {section.title} 的内容展示区。</p>
 )}
