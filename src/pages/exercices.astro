@@ -1148,20 +1148,20 @@ addressService.searchAddress("8 bd du port", 5)
       L'affichage doit être une liste <code>&lt;ul&gt;</code> dont chaque élément <code>&lt;li&gt;</code> contient :
     </p>
     <ul>
-      <li>Un index (à partir de <code>0</code> ou <code>1</code>)</li>
+      <li>Un index (à partir de <code>1</code>)</li>
       <li>Le <strong>titre de la chanson</strong></li>
       <li>Le <strong>nom de l'artiste</strong></li>
       <li>Le <strong>titre de l'album</strong></li>
-      <li>La <strong>miniature</strong> de l'album via <code>cover_small</code> (balise <code>&lt;img&gt;</code>)</li>
-      <li>Un <strong>lecteur audio</strong> (balise <code>&lt;audio&gt;</code>) avec <code>controls</code> et <code>preload="none"</code></li>
+      <li>La <strong>miniature</strong> de l'album via <code>cover_small</code></li>
+      <li>Un lecteur <code>&lt;audio&gt;</code> avec <code>controls</code> et <code>preload="none"</code></li>
     </ul>
 
     <h4>✅ Réponse :</h4>
     <p>
-      Commencez par créer un projet Astro, puis modifiez le fichier <code>src/pages/index.astro</code> pour qu'il contienne un script client de test comme suit :
+      Commencez par créer un projet Astro, puis modifiez le fichier <code>src/pages/index.astro</code> pour tester l’API Deezer :
     </p>
 
-    <pre><code class="language-html" is:raw>{`<!DOCTYPE html>
+    <pre><code>{`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1179,9 +1179,9 @@ addressService.searchAddress("8 bd du port", 5)
 </body>
 </html>`}</code></pre>
 
-    <p>Ensuite, créez un serveur <code>express</code> dans <code>src/scripts/app.ts</code> avec le contenu suivant :</p>
+    <p>Ensuite, créez le fichier <code>src/scripts/app.ts</code> côté serveur :</p>
 
-    <pre><code class="language-ts" is:raw>{`import express from "express";
+    <pre><code>{`import express from "express";
 
 const app = express();
 const PORT = 3000;
@@ -1255,10 +1255,11 @@ app.listen(PORT, () => {
 });`}</code></pre>
 
     <p>
-      Ce code contourne les erreurs CORS en exécutant la requête vers l’API Deezer côté serveur. Il transforme ensuite les résultats en une page HTML dynamique affichée au client.
+      ✅ Ce script Express contourne les erreurs CORS en appelant l’API côté serveur. Il génère une page HTML avec tous les morceaux de la playlist.
     </p>
   </article>
 )}
+
 
 
 {section.id === "16_http_crud" && (

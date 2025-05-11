@@ -87,12 +87,12 @@ border-bottom: 1px solid #ddd;
 padding-bottom: 0.5rem;
 
 code {
-  background-color: #f6f8fa;
-  color: #d73a49;
-  padding: 0.2em 0.4em;
-  border-radius: 6px;
-  font-family: SFMono-Regular, Consolas, monospace;
-  font-size: 0.95em;
+  font-size: 1em;        /* 正常大小 */
+  font-weight: bold;     /* 加粗 */
+  color: orange;         /* 橙色 */
+  background: none;      /* 去掉灰色背景 */
+  padding: 0;            /* 去掉内边距 */
+  border-radius: 0;      /* 去掉圆角 */
 }
 
 pre {
