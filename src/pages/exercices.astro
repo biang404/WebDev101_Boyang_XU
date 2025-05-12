@@ -1429,9 +1429,154 @@ deleteRestaurantClient.execute().then((restaurant) => {
 
 {section.id === "17_forms" && (
   <article>
-    <p>Je sais pas comment faire</p>
+    <h4>📝 Question :</h4>
+    <p>
+      Créez une application côté serveur (car l'API bloque en CORS) qui utilise l'API REST publique OpenAQ
+      (<a href="https://docs.openaq.org/" target="_blank">https://docs.openaq.org/</a>). Cette API fournit des données sur la qualité de l'air dans le monde entier.
+    </p>
+    <p>
+      Vous devez d'abord vous inscrire sur le site (et valider votre email) pour obtenir une clé d'accès API, qui sera disponible dans "Mon compte" une fois connecté.
+    </p>
+    <p>L'application doit :</p>
+    <ul>
+      <li>Afficher un formulaire demandant à l'utilisateur d'entrer un code pays (comme FR, CN, US).</li>
+      <li>Faire une requête GET à l'API pour récupérer une liste des stations (locations) du pays saisi.</li>
+      <li>Afficher cette liste dans une liste déroulante ou équivalente.</li>
+      <li>Quand l'utilisateur sélectionne une station, faire une autre requête GET pour récupérer les mesures de qualité de l'air correspondantes.</li>
+      <li>Afficher les mesures dans un tableau : nom du polluant, valeur mesurée, et unité.</li>
+      <li>Actualiser les données à intervalles réguliers avec <code>setInterval</code>.</li>
+      <li>Afficher une erreur si le pays est invalide ou non trouvé.</li>
+    </ul>
+
+    <h4>✅ Réponse :</h4>
+
+    <p>
+      Voici un exemple d'implémentation avec <strong>Bun</strong> côté serveur. Copiez le code suivant dans un fichier
+      <code>server.ts</code> puis exécutez-le avec <code>bun server.ts</code> :
+    </p>
+
+    <pre><code class="language-ts">{`import { serve } from "bun";
+
+const OPENAQ_API_KEY = "VOTRE_CLÉ_API_ICI"; // Remplacez par votre clé API personnelle
+const PORT = 3000;
+
+const HTML = \`
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Recherche de sites OpenAQ</title>
+</head>
+<body>
+  <h1>Recherche des stations de surveillance OpenAQ par pays</h1>
+  <label for="country">Entrez le code du pays (ex : FR, CN, US) :</label>
+  <input type="text" id="country" placeholder="FR" />
+  <button onclick="fetchLocations()">Rechercher</button>
+
+  <ul id="results"></ul>
+
+  <script>
+    async function fetchLocations() {
+      const country = document.getElementById("country").value;
+      const resultsEl = document.getElementById("results");
+      resultsEl.innerHTML = "Chargement en cours...";
+
+      try {
+        const res = await fetch("/locations?country=" + country);
+        if (!res.ok) {
+          resultsEl.innerHTML = "Échec de la recherche : " + await res.text();
+          return;
+        }
+
+        const data = await res.json();
+        resultsEl.innerHTML = "";
+        data.forEach(loc => {
+          const li = document.createElement("li");
+          li.textContent = loc.name + " (ID : " + loc.id + ")";
+          resultsEl.appendChild(li);
+        });
+      } catch (err) {
+        resultsEl.innerHTML = "Erreur : " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
+\`;
+
+async function fetchOpenAQData(endpoint: string, params: Record<string, string>) {
+  const url = new URL(\`https://api.openaq.org/v3/\${endpoint}\`);
+  Object.entries(params).forEach(([key, value]) => 
+    url.searchParams.append(key, value));
+
+  const response = await fetch(url, {
+    headers: {
+      "X-API-Key": OPENAQ_API_KEY,
+    }
+  });
+
+  if (!response.ok) throw new Error(await response.text());
+  return response.json();
+}
+
+serve({
+  port: PORT,
+  async fetch(req) {
+    const url = new URL(req.url);
+
+    if (url.pathname === "/") {
+      return new Response(HTML, {
+        headers: { "Content-Type": "text/html" }
+      });
+    }
+
+    if (url.pathname === "/locations") {
+      try {
+        const country = url.searchParams.get("country") || "";
+        const data = await fetchOpenAQData("locations", {
+          country,
+          limit: "100"
+        });
+
+        if (data.results.length === 0) {
+          return new Response("Country not found", { status: 404 });
+        }
+
+        return Response.json(data.results.map(location => ({
+          id: location.id,
+          name: location.name
+        })));
+      } catch (error: any) {
+        return new Response(error.message, { status: 500 });
+      }
+    }
+
+    if (url.pathname === "/measurements") {
+      try {
+        const locationId = url.searchParams.get("locationId") || "";
+        const data = await fetchOpenAQData("measurements", {
+          location_id: locationId,
+          limit: "10",
+          sort: "desc"
+        });
+
+        return Response.json(data.results);
+      } catch (error: any) {
+        return new Response(error.message, { status: 500 });
+      }
+    }
+
+    return new Response("Not found", { status: 404 });
+  }
+});
+
+console.log(\`Serveur lancé sur http://localhost:\${PORT}\`);
+`}</code></pre>
+
+    <p><strong>💡 Astuce :</strong> vous pouvez tester l'application en tapant <code>FR</code>, <code>CN</code> ou <code>US</code> dans le champ de recherche. Si l'API renvoie une erreur, vous verrez un message clair à l'écran.</p>
   </article>
 )}
+
 
 {section.id === "18_web_components" && (
   <article>
